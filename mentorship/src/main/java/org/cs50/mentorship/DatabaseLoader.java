@@ -7,15 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-    private final ParticipantRepository repository;
+    private final ParticipantRepository participantRepository;
+    private final RequestRepository mentorshipRequestRepository;
 
     @Autowired
-    public DatabaseLoader(ParticipantRepository repository) {
-        this.repository = repository;
+    public DatabaseLoader(ParticipantRepository participantRepository, RequestRepository mentorshipRequestRepository) {
+        this.participantRepository = participantRepository;
+        this.mentorshipRequestRepository = mentorshipRequestRepository;
     }
 
     @Override
     public void run(String... strings) throws Exception {
-        this.repository.save(new Participant("Christopher", "Barrett"));
+        this.participantRepository.save(new Participant("Christopher", "Barrett"));
+        this.mentorshipRequestRepository.save(new Request("Christopher Barrett", "I would like a roadmap for java concurrency", "Java Concurrency"));
+
     }
 }

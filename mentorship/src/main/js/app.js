@@ -1,5 +1,4 @@
 'use strict';
-
 const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
@@ -8,47 +7,51 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {participants: []};
+		this.state = {requests: []};
 	}
 
 	componentDidMount() {
-		client({method: 'GET', path: '/api/participants'}).done(response => {
-			this.setState({participants: response.entity._embedded.participants});
+		client({method: 'GET', path: '/api/requests'}).done(response => {
+			this.setState({requests: response.entity._embedded.requests});
 		});
 	}
 
 	render() {
 		return (
-			<ParticipantList participants={this.state.participants}/>
+			<RequestList requests={this.state.requests}/>
 		)
 	}
 }
 
-class ParticipantList extends React.Component{
+class RequestList extends React.Component{
 	render() {
-		const participants = this.props.participants.map(participant =>
-			<Participant key={participant._links.self.href} participant={participant}/>
+		const requests = this.props.requests.map(request =>
+			<Request key={request._links.self.href} request={request}/>
 		);
 		return (
-			<table>
+		<div class="table-responsive">
+			<table className="table .table-striped">
 				<tbody>
 					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
+						<th>Requestor</th>
+						<th>Description</th>
+						<th>Tags</th>
 					</tr>
-					{participants}
+					{requests}
 				</tbody>
 			</table>
+		</div>
 		)
 	}
 }
 
-class Participant extends React.Component{
+class Request extends React.Component{
 	render() {
 		return (
 			<tr>
-				<td>{this.props.participant.firstName}</td>
-				<td>{this.props.participant.lastName}</td>
+				<td>{this.props.request.initiator}</td>
+				<td>{this.props.request.request}</td>
+				<td>{this.props.request.tags}</td>
 			</tr>
 		)
 	}
