@@ -19,7 +19,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         this.participantRepository.save(new Participant("Christopher", "Barrett"));
-        this.mentorshipRequestRepository.save(new Request("Christopher Barrett", "I would like a roadmap for java concurrency", "Java Concurrency"));
-
+        this.mentorshipRequestRepository.save(new Request("Joe Soap", "I would like a roadmap for java concurrency", "#Java #Concurrency"));
+        this.mentorshipRequestRepository.save(new Request("French Fry", "I would like to get into Data Science using Python", "#Python #DataScience"));
+        this.mentorshipRequestRepository.save(new Request("Jenny Abe", "I would like a Web Programming roadmap", "#WebProgramming"));
+        this.mentorshipRequestRepository.save(new Request("Loco Rocco", "I would like to get into Networking", "#Networks"));
     }
 }

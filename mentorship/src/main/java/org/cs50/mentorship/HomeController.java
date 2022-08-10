@@ -11,9 +11,9 @@ public class HomeController {
         return "CurrentMentorshipRequests";
     }
 
-    @RequestMapping(value = "/createrequest")
+    @RequestMapping(value = "/myrequests")
     public String createRequest() {
-        return "createrequest";
+        return "MyRequests";
     }
 
     @RequestMapping(value = "/test")
